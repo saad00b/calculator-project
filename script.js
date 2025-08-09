@@ -10,6 +10,7 @@ function operate(a,b,op) {
     if (op === "/") {divide(a,b);}
 }
 
+let activeNumber ="";
 let num1 ;
 let num2 ;
 let operator ;
@@ -17,7 +18,18 @@ let operator ;
 let numbers = Array.from(document.querySelectorAll(".digit"));
 for (num of numbers) {
     num.addEventListener("click",(e) => {
-        num1 = e.target.textContent;
-        console.log(num1);});
+        activeNumber += e.target.textContent;
+        console.log(activeNumber);});
+}
+
+let operators = Array.from(document.querySelectorAll(".operator"));
+for (op of operators) {
+    op.addEventListener("click", (e) => {
+        operator = e.target.textContent
+        console.log(operator);
+        num1 = parseInt(activeNumber);
+        console.log(`number 1 is ${num1}`);
+        activeNumber = "";
+    });
 }
 
