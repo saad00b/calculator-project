@@ -14,4 +14,10 @@ let num1 ;
 let num2 ;
 let operator ;
 
+let numbers = Array.from(document.querySelectorAll(".digit"));
+for (num of numbers) {
+    num.addEventListener("click",(e) => {
+        num1 = e.target.textContent;
+        console.log(num1);});
+}
 
