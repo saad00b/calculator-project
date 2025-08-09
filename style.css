@@ -1,0 +1,29 @@
+.btns-container {
+    display: flex;
+}
+
+.btns-operators {
+    display: flex;
+    flex-direction: column;
+}
+
+.digits-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+.btns-digits {
+    display: flex;
+    flex-direction: column;
+}
+
+.display {
+    background-color: aqua;
+    width: 100px;
+    height: 30px;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+}
