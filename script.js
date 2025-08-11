@@ -10,6 +10,8 @@ function operate(a,b,op) {
     if (op === "/") {return divide(a,b);}
 }
 
+
+
 let activeNumber ="";
 let nums = [] ;
 let result ;
@@ -34,12 +36,16 @@ let operators = Array.from(document.querySelectorAll(".operator"));
 for (op of operators) {
     op.addEventListener("click", (e) => {
         if (activeNumber !== "") {
-            operator = e.target.textContent ;
-            console.log(operator);
-            /*if (nums.length === 1) {
+            //operator = e.target.textContent ;
+            //console.log(operator);
+            if (nums.length === 1) { //for chaining ops
                 getResult();
+                activeNumber = "";
+                operator = e.target.textContent ;
+                display.textContent += e.target.textContent;
                 return ;
-            }*/
+            }
+            operator = e.target.textContent ;
 
             if (nums.length === 0) 
             {nums.push(parseInt(activeNumber));}
