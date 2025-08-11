@@ -26,7 +26,11 @@ for (num of numbers) {
         if (operator !== "" || nums.length !== 1) //prevent changing result of previous op
         {
             activeNumber += e.target.textContent;
-            console.log(activeNumber);
+            display.textContent += e.target.textContent;
+        }
+        else {
+            clear();
+            activeNumber += e.target.textContent;
             display.textContent += e.target.textContent;
         }
     });
@@ -36,8 +40,6 @@ let operators = Array.from(document.querySelectorAll(".operator"));
 for (op of operators) {
     op.addEventListener("click", (e) => {
         if (activeNumber !== "") {
-            //operator = e.target.textContent ;
-            //console.log(operator);
             if (nums.length === 1) { //for chaining ops
                 getResult();
                 activeNumber = "";
@@ -49,7 +51,6 @@ for (op of operators) {
 
             if (nums.length === 0) 
             {nums.push(parseInt(activeNumber));}
-            console.log(`number 1 is ${nums[0]}`);
             activeNumber = "";
             display.textContent += operator; 
         }
@@ -73,5 +74,18 @@ function getResult() {
             operator = "";
         }
     }
+}
+
+let resetButton = document.querySelector("#reset");
+resetButton.addEventListener("click", () => {
+    clear();
+})
+
+function clear() {
+    activeNumber ="";
+    nums = [] ;
+    result = null;
+    operator = "";
+    display.textContent = "";
 }
 
