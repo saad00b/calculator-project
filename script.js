@@ -1,17 +1,3 @@
-function add(a,b) {return parseFloat((a+b).toFixed(2));}
-function subtract(a,b) {return parseFloat((a-b).toFixed(2));}
-function multiply(a,b) {return parseFloat((a*b).toFixed(2));}
-function divide(a,b) {return parseFloat((a/b).toFixed(2));}
-
-function operate(a,b,op) {
-    if (op === "+") {return add(a,b);}
-    if (op === "-") {return subtract(a,b);}
-    if (op === "*") {return multiply(a,b);}
-    if (op === "/") {return divide(a,b);}
-}
-
-
-
 let activeNumber ="";
 let nums = [] ;
 let result ;
@@ -62,19 +48,6 @@ resultButton.addEventListener("click",() => {
     getResult();
 })
 
-function getResult() {
-    if (activeNumber !== "" && nums.length === 1 && operator !== "") {
-        nums.push(parseInt(activeNumber));
-        activeNumber = "";
-        if (nums.length === 2) {
-            result = operate(nums[0],nums[1],operator);
-            display.textContent = `${result}` ;
-            nums = [result];
-            activeNumber = result ;
-            operator = "";
-        }
-    }
-}
 
 let resetButton = document.querySelector("#reset");
 resetButton.addEventListener("click", () => {
@@ -87,5 +60,38 @@ function clear() {
     result = null;
     operator = "";
     display.textContent = "";
+}
+
+
+function add(a,b) {return parseFloat((a+b).toFixed(2));}
+function subtract(a,b) {return parseFloat((a-b).toFixed(2));}
+function multiply(a,b) {return parseFloat((a*b).toFixed(2));}
+function divide(a,b) {
+    if (b === 0) {
+        alert("ERROR: Can't divide by 0!");
+        clear();
+        return "";
+    }
+    return parseFloat((a/b).toFixed(2));}
+
+function operate(a,b,op) {
+    if (op === "+") {return add(a,b);}
+    if (op === "-") {return subtract(a,b);}
+    if (op === "*") {return multiply(a,b);}
+    if (op === "/") {return divide(a,b);}
+}
+
+function getResult() {
+    if (activeNumber !== "" && nums.length === 1 && operator !== "") {
+        nums.push(parseInt(activeNumber));
+        activeNumber = "";
+        if (nums.length === 2) {
+            result = operate(nums[0],nums[1],operator);
+            display.textContent = `${result}` ;
+            nums = [result];
+            activeNumber = result ;
+            operator = "";
+        }
+    }
 }
 
