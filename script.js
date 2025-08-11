@@ -21,30 +21,51 @@ display.textContent = "";
 let numbers = Array.from(document.querySelectorAll(".digit"));
 for (num of numbers) {
     num.addEventListener("click",(e) => {
-        activeNumber += e.target.textContent;
-        console.log(activeNumber);
-        display.textContent += e.target.textContent;
+        if (operator !== "" || nums.length !== 1) //prevent changing result of previous op
+        {
+            activeNumber += e.target.textContent;
+            console.log(activeNumber);
+            display.textContent += e.target.textContent;
+        }
     });
 }
 
 let operators = Array.from(document.querySelectorAll(".operator"));
 for (op of operators) {
     op.addEventListener("click", (e) => {
-        operator = e.target.textContent ;
-        console.log(operator);
-        nums.push(parseInt(activeNumber));
-        console.log(`number 1 is ${nums[0]}`);
-        activeNumber = "";
-        display.textContent += operator; 
+        if (activeNumber !== "") {
+            operator = e.target.textContent ;
+            console.log(operator);
+            /*if (nums.length === 1) {
+                getResult();
+                return ;
+            }*/
+
+            if (nums.length === 0) 
+            {nums.push(parseInt(activeNumber));}
+            console.log(`number 1 is ${nums[0]}`);
+            activeNumber = "";
+            display.textContent += operator; 
+        }
     });
 }
 
 let resultButton = document.querySelector("#result");
 resultButton.addEventListener("click",() => {
-    nums.push(parseInt(activeNumber));
-    if (nums.length === 2) {
-        result = operate(nums[0],nums[1],operator);
-        display.textContent = `${result}` ;
-    }
+    getResult();
 })
+
+function getResult() {
+    if (activeNumber !== "" && nums.length === 1 && operator !== "") {
+        nums.push(parseInt(activeNumber));
+        activeNumber = "";
+        if (nums.length === 2) {
+            result = operate(nums[0],nums[1],operator);
+            display.textContent = `${result}` ;
+            nums = [result];
+            activeNumber = result ;
+            operator = "";
+        }
+    }
+}
 
